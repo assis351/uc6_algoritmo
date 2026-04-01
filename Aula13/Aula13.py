@@ -17,15 +17,18 @@ cursor = conexao.cursor(pySQL.cursors.DictCursor)
 cursor.execute("SELECT * FROM clientes")
 todos = cursor.fetchall()
 
-#for cliente in todos:
-    #print(cliente["nome"],"-", cliente["email"],"-", cliente["telefone"])
-    
-#cursor.execute("select * from cliente where id_ciente = 1")
-#cliente = cursor.fetchone()
-#print(cliente)
+# for cliente in todos:
+#     print(cliente["nome"],"-", cliente["email"],"-", cliente["telefone"])
 
+# ── Buscar um único registro por ID ────────
+# cursor.execute("SELECT * FROM clientes WHERE id_cliente = 1")
+# cliente = cursor.fetchone()
+# print(cliente) # {'id': 1, 'nome': 'Maria', 'email': '...'}
+
+# ── Buscar com filtro dinâmico (SEGURO) ────
 nome_busca = "Ursula%"
-cursor.execute("select * from clientes where nome like %s")
+cursor.execute("SELECT * FROM clientes WHERE nome LIKE %s", (nome_busca),)
 
 resultado = cursor.fetchall()
+
 print(resultado)
